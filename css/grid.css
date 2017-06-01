@@ -1,0 +1,46 @@
+*{box-sizing: border-box;}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  padding: 20px;
+  width: 100%;
+  min-height: 1px;
+  float: left;
+}
+
+.col {
+  background: green;
+  min-height: 40px;
+  border-radius: 8px;
+  display: inline-block;
+  float: left;
+}
+
+.col:first-child {
+  margin-left: 0px;
+}
+
+.col:last-child {
+  margin-right: 0px;
+}
+
+/* col width for 5 column grid layout */
+.col.five{width: 100%;}
+.col.four{width: 50%;}
+.col.three{width: 33.33%;}
+.col.two{width: 25%;}
+.col.one{width: 20%;}
+
+
+@media(max-width: 786px) {
+  .col {
+    width: 100% !important;
+    margin: 5px 0px 5px 0px;
+  }
+}
