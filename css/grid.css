@@ -25,6 +25,8 @@ body {
   border-top:1px solid black;
   display: inline-block;
   float: left;
+  text-align: center;
+  padding: 2%;
 }
 
 .col:first-child {

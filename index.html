@@ -10,31 +10,41 @@
 </head>
 <body>
 
-  <div class="selector col one">
-    <label>Less
-      <input type="radio" name="selector" value="less" checked>
-    </label>
 
-    <label>More
-      <input type="radio" name="selector" value="more">
-    </label>
-  </div>
 
-  <div class="row">
-    <div class="col one"></div>
-    <div class="col one"></div>
-    <div class="col one"></div>
-    <div class="col one"></div>
-    <div class="col one"></div>
-  </div>
+  <div id="tableModule">
 
-  <div class="row">
-    <div class="col one"></div>
-    <div class="col one"></div>
-    <div class="col one"></div>
-    <div class="col one"></div>
-    <div class="col one"></div>
-  </div>
+    <!-- Less/More Info Selector -->
+    <div id="selector" class="col one">
+      <label>Less
+        <input type="radio" name="selector" value="less" checked>
+      </label>
 
+      <label>More
+        <input type="radio" name="selector" value="more">
+      </label>
+    </div>
+
+
+    <div class="row">
+        <div class="col one">11</div>
+        <div class="col one">12</div>
+        <div class="col one">13</div>
+        <div class="col one">14</div>
+        <div class="col one">15</div>
+
+        <div class="col one">21</div>
+        <div class="col one">22</div>
+        <div class="col one">23</div>
+        <div class="col one">24</div>
+        <div class="col one">25</div>
+    </div>
+
+
+  </div><!-- tableModule -->
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="node_modules/mustache/mustache.min.js" charset="utf-8"></script>
+  <script src="js/tableModule.js" charset="utf-8"></script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "name"        : "name",
+  "forecast"    : "forecast",
+  "plan"        : "plan",
+  "monthly-plan": "monthly-plan",
+  "comments"    : "comments",
+  "best-case"   : "best case",
+  "commit"      : "commit"
+}

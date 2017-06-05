@@ -1,0 +1,22 @@
+{
+  "name": "public",
+  "version": "1.0.0",
+  "description": "a business report application using a responsive data grid",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cgradwohl/grid-report.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cgradwohl/grid-report/issues"
+  },
+  "homepage": "https://github.com/cgradwohl/grid-report#readme",
+  "dependencies": {
+    "mustache": "^2.3.0"
+  }
+}
