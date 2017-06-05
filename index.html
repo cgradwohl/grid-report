@@ -6,27 +6,47 @@
   <!-- <link rel="stylesheet" href="css/normalize.css"> -->
   <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="css/selector.css">
+  <link rel="stylesheet" href="css/dropdown.css">
   <title>Grid Report</title>
 </head>
 <body>
 
 
-
-  <div id="tableModule">
-
-    <!-- Less/More Info Selector -->
-    <div id="selector" class="col one">
-      <label>Less
+    <!-- Selector Module -->
+    <div id="selector-module" class="col one selector">
+        <label>Less
         <input type="radio" name="selector" value="less" checked>
-      </label>
+        </label>
 
-      <label>More
+        <label>More
         <input type="radio" name="selector" value="more">
-      </label>
+        </label>
     </div>
 
 
-    <div class="row">
+    <!-- Dropdown Module -->
+    <div class="col one dropdown">
+        <button class="dropbtn">\/</button>
+        <div class="dropdown-content">
+            <form class="dropdown-content" action="" method="get">
+
+
+                <!-- dynamic {{}} input tags here -->
+
+                <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+                <input type="checkbox" name="vehicle" value="Car" checked> I have a car<br>
+                <input type="submit" value="Apply">
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Grid Module -->
+    <div id="grid-module" class="row">
+
+        <!-- dynamic {{}} div tags here  -->
+
+        
         <div class="col one">11</div>
         <div class="col one">12</div>
         <div class="col one">13</div>
@@ -41,10 +61,8 @@
     </div>
 
 
-  </div><!-- tableModule -->
-
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="js/mustache.min.js" charset="utf-8"></script>
-  <script src="js/tableModule.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="js/mustache.min.js" charset="utf-8"></script>
+    <script src="js/tableModule.js" charset="utf-8"></script>
 </body>
 </html>
