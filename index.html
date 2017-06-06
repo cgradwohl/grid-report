@@ -47,23 +47,17 @@
     <!-- Grid Module -->
     <div id="grid-module" class="row">
 
-        <!-- dynamic {{}} div tags here  -->
-        <script src="" type="text/template">
-            <div class="col {{column.size}}">{{column.name}}</div>
+        <script id="grid-header" type="text/template">
+            <div class="col {{size}}">{{name}}</div>
+        </script>
+
+        <script id="grid-body" type="text/template">
+            <div class="col {{col.size}}">{{col.value}}</div>
         </script>
 
 
-        <div class="col one">11</div>
-        <div class="col one">12</div>
-        <div class="col one">13</div>
-        <div class="col one">14</div>
-        <div class="col one">15</div>
+        <!-- <div class="col one">11</div> -->
 
-        <div class="col one">21</div>
-        <div class="col one">22</div>
-        <div class="col one">23</div>
-        <div class="col one">24</div>
-        <div class="col one">25</div>
     </div>
 
 
