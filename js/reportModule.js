@@ -52,6 +52,10 @@ const events = {
 /***    @name GRID MODULE       ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
+    let map            = ['','five', 'four', 'three', 'two', 'one'];
+
+    // stores our ajax request a promise so we do not have to make multiple requests
+    let gridData = getGridData();
 
     // cacheDOM
     let $grid = $('#grid-module');
@@ -65,16 +69,17 @@ const events = {
     events.on('gridBody', renderBody);*/
 
     (function init() {
-        getGridData().then(data => render(data));
+        gridData.then(data => render(data));
     })();
+
 
     function getGridData() {
         return new Promise( (resolve, reject) => {
             $.ajax({
-                url: 'data/data.json',
+                url     : 'data/data.json',
                 dataType: 'json',
-                success: (response) => resolve(response),
-                error: (err) => reject(err)
+                success : response => resolve(response),
+                error   : err => reject(err)
             });
         });
     }
@@ -83,7 +88,6 @@ const events = {
 
         let headers        = Object.keys(data[0]);
         let tooManyHeaders = Object.keys(data[0]).length >= 5;
-        let map            = ['','five', 'four', 'three', 'two', 'one'];
         let index          = 0;
         let names          = [];
 
@@ -102,7 +106,7 @@ const events = {
             ));
         });
 
-        // filter out selected keys and send values to renderBody()
+        // filter out selected keys and send values to updateGridBody(bodyData)
         // renders Grid Body
 
 
@@ -110,7 +114,7 @@ const events = {
 
     // @TODO: show(bool) - if(bool) render more else render less,
 
-    // @TODO: updateGrid(colNames) - renders grid based on colNames, may be able to only need GridModule.render()
+    // @TODO: updateGridBody(bodyData) - renders grid based on colNames, may be able to only need GridModule.render()
 
 
 })();
