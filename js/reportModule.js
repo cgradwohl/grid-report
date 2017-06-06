@@ -52,10 +52,7 @@ const events = {
 /***    @name GRID MODULE       ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
-    let map            = ['','five', 'four', 'three', 'two', 'one'];
-
-    // stores our ajax request a promise so we do not have to make multiple requests
-    let gridData = getGridData();
+    let map      = ['','five', 'four', 'three', 'two', 'one'];
 
     // cacheDOM
     let $grid = $('#grid-module');
@@ -68,23 +65,18 @@ const events = {
     events.on('gridHeader', renderHeader);
     events.on('gridBody', renderBody);*/
 
-    (function init() {
-        gridData.then(data => render(data));
-    })();
-
-
-    function getGridData() {
-        return new Promise( (resolve, reject) => {
-            $.ajax({
-                url     : 'data/data.json',
-                dataType: 'json',
-                success : response => resolve(response),
-                error   : err => reject(err)
-            });
+    let gridData = new Promise( (resolve, reject) => {
+        $.ajax({
+            url     : 'data/data.json',
+            dataType: 'json',
+            success : response => resolve(response),
+            error   : err => reject(err)
         });
-    }
+    });
 
-    function render(data) {
+    gridData.then(data => init(data));
+
+    function init(data) {
 
         let headers        = Object.keys(data[0]);
         let tooManyHeaders = Object.keys(data[0]).length >= 5;
@@ -106,7 +98,6 @@ const events = {
             ));
         });
 
-        // filter out selected keys and send values to updateGridBody(bodyData)
         // renders Grid Body
 
 
@@ -114,9 +105,22 @@ const events = {
 
     // @TODO: show(bool) - if(bool) render more else render less,
 
-    // @TODO: updateGridBody(bodyData) - renders grid based on colNames, may be able to only need GridModule.render()
+    // @TODO
+    // takes as input an array of names
+    /*function renderHeader(data) {
+
+    }
+    */
 
 
+
+    // @TODO
+    // events.on('promisetest', updateBody); <- use this bind the DROPDOWN update
+    // we want this to take the full object array as input
+    /*function renderBody(data) {
+        console.log(data);
+        // RENDER NEW GRID BODY
+    }*/
 })();
 
 
@@ -141,7 +145,12 @@ const events = {
         // use columnNames to render the dropdown-content
         // console.log(columnNames);
 
-        // render()
+        // @TODO
+        // USE THE PROMISE TO EMIT EVENT FROM DROPDOWN :)
+        // USE THIS IN DROPDOWN
+        /*gridData.then( data => {
+            events.emit('promisetest', data);
+        });*/
     }
 
 
