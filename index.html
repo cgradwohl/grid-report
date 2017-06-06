@@ -25,13 +25,16 @@
 
 
     <!-- Dropdown Module -->
-    <div class="col one dropdown">
+    <div id="dropdown-module" class="col one dropdown">
         <button class="dropbtn">\/</button>
         <div class="dropdown-content">
             <form class="dropdown-content" action="" method="get">
 
 
                 <!-- dynamic {{}} input tags here -->
+                <!--<script src="dropdown-template" type="text/template">
+                    <input type="checkbox" value="{{.}}">
+                </script>-->
 
                 <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
                 <input type="checkbox" name="vehicle" value="Car" checked> I have a car<br>
@@ -45,8 +48,11 @@
     <div id="grid-module" class="row">
 
         <!-- dynamic {{}} div tags here  -->
+        <script src="" type="text/template">
+            <div class="col {{column.size}}">{{column.name}}</div>
+        </script>
 
-        
+
         <div class="col one">11</div>
         <div class="col one">12</div>
         <div class="col one">13</div>
@@ -63,6 +69,6 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="js/mustache.min.js" charset="utf-8"></script>
-    <script src="js/tableModule.js" charset="utf-8"></script>
+    <script src="js/reportModule.js" charset="utf-8"></script>
 </body>
 </html>
