@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="css/selector.css">
   <link rel="stylesheet" href="css/dropdown.css">
@@ -12,8 +12,7 @@
 </head>
 <body>
 
-
-    <!-- Selector Module -->
+    <!-- Selector -->
     <div id="selector-module" class="col one selector">
         <label>Less
         <input type="radio" onclick="events.emit('selectorChange', false)" name="selector" value="less">
@@ -23,8 +22,6 @@
         <input type="radio" onclick="events.emit('selectorChange', true)" name="selector" value="more" checked>
         </label>
     </div>
-
-
 
     <!-- Dropdown Module -->
     <div class="dropdown">
@@ -40,7 +37,7 @@
     <!-- Grid Module -->
     <div id="grid-module" class="row"></div>
 
-
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="js/mustache.min.js" charset="utf-8"></script>
     <script src="js/reportModule.js" charset="utf-8"></script>

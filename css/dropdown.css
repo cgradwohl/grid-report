@@ -10,7 +10,6 @@
 /* show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
-
 }
 
 /* dropdown content (starts as hidden) */
@@ -28,6 +27,7 @@
     text-align: left;
 }
 
+/* apply button */
 .dropdown-content button {
     position: absolute;
     bottom: 5px;

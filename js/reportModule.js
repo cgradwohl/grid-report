@@ -1,3 +1,6 @@
+
+
+
 /***    *   *   *   *   *   *  ***/
 /***    @name EVENT MEDIATOR   ***/
 /***    *   *   *   *   *   *  ***/
@@ -30,25 +33,25 @@ const events = {
 };
 
 
+
 /***    *   *   *   *   *   *   ***/
 /***    @name GRID MODULE       ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
+
     let map                  = ['','five', 'four', 'three', 'two', 'one'];
     let header_template      = '<div class ="header col {{size}}"><strong>{{name}}</strong></div>';
-    let last_header_template = '<div class ="header col {{size}}"><strong>{{name}}</strong><div class="dropdown" ><a class="dropbtn"><div class="arrow-down"></div></a><form id="dropdown-module" class="dropdown-content"><h3>Selected Fields</h3><button type="button" class="dropdown-btn" name="button" onclick="events.emit("dropdownFormClick")">Apply</button></form></div></div>';
     let body_template        = '<div class ="body col {{col.size}}">{{col.value}}<div class="hideMe"></div></div>';
     let nested_body_template = '<div class ="body col {{col.size}}"><div>{{col.value1}}</div><div class="hideMe">{{col.value2}}</div></div>';
 
     // cacheDOM
     let $grid = $('#grid-module');
 
-
-    // bind events
+    // subscribe to events
     events.on('selectorChange', show);
-    events.on('updateGrid', updateGrid);
+    events.on('columnChange', updateGrid);
 
-    // request data
+    // saves ajax request as a promise
     let gridData = new Promise( (resolve, reject) => {
         $.ajax({
             url     : 'data/data.json',
@@ -57,30 +60,27 @@ const events = {
             error   : err => reject(err)
         });
     });
+
+
+    // use's fufilled promise to initialize Grid
     gridData.then(data => init(data));
 
 
+    /** @param {Array<JSON>} - initializes grid with 5 columns */
     function init(data) {
 
-        let headers        = Object.keys(data[0]);
-        let tooManyHeaders = Object.keys(data[0]).length >= 5;
-        let index          = 0;
-        let names          = [];
+        // sends dropdown module all header names
+        let headers = Object.keys(data[0]);
+        let names   = headers.slice(0,5);
+        let size    = 5;
+
 
         events.emit('renderDropdown', headers);
-
-        if( tooManyHeaders ) {
-            names = headers.slice(0,5);
-            index = 5;
-        } else {
-            names = headers;
-            index = names.length;
-        }
 
         // renders Grid Header
         names.map(name => {
             $grid.append(Mustache.render(header_template,
-                {name: name.toUpperCase(), size: map[index]}
+                {name: name.toUpperCase(), size: map[size]}
             ));
         });
 
@@ -89,7 +89,7 @@ const events = {
             for (let key in obj) {
                 if( names.includes(key) ) {
                     $grid.append(Mustache.render(body_template,
-                        {col:{value: obj[key], size: map[index]}}
+                        {col:{value: obj[key], size: map[size]}}
                     ));
                 }
             }
@@ -97,16 +97,20 @@ const events = {
 
     }
 
-    function updateGrid(indexArr) {
+
+    /** @param {Array<Number>} - updates Grid on 'columnChange' event */
+    function updateGrid(selected) {
 
         // removes old templates
         $grid.empty();
 
+        // use's fufilled promise
         gridData.then( data => {
             let headers = Object.keys(data[0]);
             let names   = [];
 
-            indexArr.map(index => names.push(headers[index]) );
+            // uses selected index to map to header names
+            selected.map(index => names.push(headers[index]) );
 
             // renders Grid Header
             names.map(name => {
@@ -120,7 +124,7 @@ const events = {
                 for (let key in obj) {
                     if( names.includes(key) ){
                         if( typeof(obj[key])==='object' ){
-                            // ADD LISTED TEMPLATE
+                            // adds multi valued keys to the nested template
                             $grid.append(Mustache.render(nested_body_template,
                                 {col:{value1: obj[key][0], value2: obj[key][1], size: map[names.length]}}
                             ));
@@ -132,9 +136,12 @@ const events = {
                     }
                 }
             });
+
         });
     }
 
+
+    /** @param {Boolean} - shows hidden Elements */
     function show(bool) {
 
         let $hiddenTags = $('.hideMe');
@@ -146,6 +153,7 @@ const events = {
 })();
 
 
+
 /***    *   *   *   *   *   *   ***/
 /***    @name DROPDOWN MODULE   ***/
 /***    *   *   *   *   *   *   ***/
@@ -155,13 +163,12 @@ const events = {
     let $dropdown = $('#dropdown-module');
     let checkbox_template = '<input class="fields" type="checkbox" name="" value="{{value}}">{{name}}<br>';
 
-    // bind events
+    // subscribe to events
     events.on('renderDropdown', render);
     events.on('dropdownFormClick', getSelected);
 
     // gets the index of the selected fields
-    // makes an extra DOM query :(
-    function getSelected(){
+    function getSelected() {
 
         let numbers = [];
         let $fields = $('.fields').toArray().map(field => {
@@ -169,7 +176,9 @@ const events = {
         });
 
         if( numbers.length>5 ) alert("PLEASE SELECT ONLY FIVE FIELDS!")
-        else events.emit('updateGrid', numbers);
+
+        // sends index of selected fields to Grid Module
+        else events.emit('columnChange', numbers);
     }
 
     function render(data) {
