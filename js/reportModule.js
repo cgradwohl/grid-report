@@ -30,32 +30,14 @@ const events = {
 };
 
 
-
-/***    *   *   *   *   *   *   ***/
-/***    @name SELECTOR MODULE   ***/
-/***    *   *   *   *   *   *   ***/
-(function() {
-
-
-    // cacheDOM
-
-    // bind events
-
-    // @TODO: applySelector() - events.emit('selectorChange', boolean)
-
-
-})();
-
-
-
 /***    *   *   *   *   *   *   ***/
 /***    @name GRID MODULE       ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
     let map                  = ['','five', 'four', 'three', 'two', 'one'];
     let header_template      = '<div class ="header col {{size}}"><strong>{{name}}</strong></div>';
-    let body_template        = '<div class ="body col {{col.size}}">{{col.value}}</div>';
-    let nested_body_template = '<div class ="body col {{col.size}}">{{#col.value}}<span class="hide">{{.}}</span>{{/col.value}}</div>';
+    let body_template        = '<div class ="body col {{col.size}}">{{col.value}}<div class="hideMe"></div></div>';
+    let nested_body_template = '<div class ="body col {{col.size}}"><div>{{col.value1}}</div><div class="hideMe">{{col.value2}}</div></div>';
 
     // cacheDOM
     let $grid = $('#grid-module');
@@ -73,10 +55,10 @@ const events = {
             error   : err => reject(err)
         });
     });
-    gridData.then(data => render(data));
+    gridData.then(data => init(data));
 
     // methods
-    function render(data) {
+    function init(data) {
 
         let headers        = Object.keys(data[0]);
         let tooManyHeaders = Object.keys(data[0]).length >= 5;
@@ -135,11 +117,9 @@ const events = {
                 for (let key in obj) {
                     if( names.includes(key) ){
                         if( typeof(obj[key])==='object' ){
-                            console.log('key', key);
-                            console.log('obj[key]', obj[key]);
                             // ADD LISTED TEMPLATE
                             $grid.append(Mustache.render(nested_body_template,
-                                {col:{value: obj[key], size: map[names.length]}}
+                                {col:{value1: obj[key][0], value2: obj[key][1], size: map[names.length]}}
                             ));
                         }else {
                             $grid.append(Mustache.render(body_template,
@@ -150,12 +130,16 @@ const events = {
 
                 }
             });
+
         });
 
     }
 
     function show(bool) {
+        let $hiddenTags = $('.hideMe');
 
+        if( bool ) $hiddenTags.show();
+        else $hiddenTags.hide();
     }
 
 })();
