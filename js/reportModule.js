@@ -74,21 +74,23 @@ const events = {
         });
     });
 
-    gridData.then(data => init(data));
+    gridData.then(data => render(data));
 
-    function init(data) {
+    function render(data) {
 
         let headers        = Object.keys(data[0]);
         let tooManyHeaders = Object.keys(data[0]).length >= 5;
         let index          = 0;
         let names          = [];
 
+        events.emit('renderDropdown', headers);
+
         if( tooManyHeaders ) {
             names = headers.slice(0,5);
             index = 5;
         } else {
-            names = data;
-            index = data.length;
+            names = headers;
+            index = names.length;
         }
 
         // renders Grid Header
@@ -99,7 +101,15 @@ const events = {
         });
 
         // renders Grid Body
-
+        data.forEach(obj => {
+            for (let key in obj) {
+                if( names.includes(key) ){
+                    $grid.append(Mustache.render(body_template,
+                        {col:{value: obj[key],size: map[index]}}
+                    ));
+                }
+            }
+        });
 
     }
 
@@ -131,6 +141,8 @@ const events = {
 
 
     // cacheDOM
+    let $dropdown = $('#dropdown-module');
+    let dropdown_template = $('#dropdown_template').html();
 
 
     // bind events
@@ -138,7 +150,7 @@ const events = {
     // OR
     // events.on('columnNames', setDropdown);
 
-    events.on('gridHeader', render);
+    events.on('renderDropdown', render);
 
 
     function setDropdown(columnNames) {
@@ -155,7 +167,11 @@ const events = {
 
 
     function render(data) {
-        // console.log(data);
+        data.forEach(name => {
+            $dropdown.append(Mustache.render(dropdown_template,
+                {name: name}
+            ));
+        });
     }
 
     // @TODO: applyColumnChange() - events.emit('columnChange', newColumnNames)

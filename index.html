@@ -25,19 +25,16 @@
 
 
     <!-- Dropdown Module -->
-    <div id="dropdown-module" class="col one dropdown">
+    <div class="col one dropdown">
         <button class="dropbtn">\/</button>
+
         <div class="dropdown-content">
-            <form class="dropdown-content" action="" method="get">
+            <form id="dropdown-module" class="dropdown-content" action="" method="get">
 
+                <script id="dropdown_template" type="text/template">
+                    <input type="checkbox" name="vehicle" value="{{name}}">{{name}}<br>
+                </script>
 
-                <!-- dynamic {{}} input tags here -->
-                <!--<script src="dropdown-template" type="text/template">
-                    <input type="checkbox" value="{{.}}">
-                </script>-->
-
-                <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
-                <input type="checkbox" name="vehicle" value="Car" checked> I have a car<br>
                 <input type="submit" value="Apply">
             </form>
         </div>

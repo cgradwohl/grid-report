@@ -3,8 +3,8 @@
         "name"        : "USA",
         "forecast"    : "$20,000,000",
         "plan"        : "$10,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "common stockholders",
         "best-case"   : [ "$18,000,000","$20,000,000"],
         "commit"      : ["$9,500,000", "10,000,000"]
     },
@@ -12,8 +12,8 @@
         "name"        : "Japan",
         "forecast"    : "$10,000,000",
         "plan"        : "$5,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "preferred stockholders",
         "best-case"   : [ "$12,000,000","$18,000,000"],
         "commit"      : ["$6,000,000", "9,000,000"]
     },
@@ -21,8 +21,8 @@
         "name"        : "China",
         "forecast"    : "$20,000,000",
         "plan"        : "$10,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "N/A",
         "best-case"   : [ "$9,000,000","$11,000,000"],
         "commit"      : ["$3,000,000", "7,000,000"]
     },
@@ -30,8 +30,8 @@
         "name"        : "Korea",
         "forecast"    : "$50,000,000",
         "plan"        : "$100,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "To be liquidated",
         "best-case"   : [ "$2,000,000","$6,000,000"],
         "commit"      : ["$1,000,000", "2,200,000"]
     },
@@ -39,8 +39,8 @@
         "name"        : "Italy",
         "forecast"    : "$2,000,000",
         "plan"        : "$1,000,000",
-        "monthly-plan": "83,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$83,333",
+        "comments"    : "common stockholders",
         "best-case"   : [ "$8,000,000","$9,000,200"],
         "commit"      : ["$1,500,000", "3,500,000"]
     },
@@ -48,8 +48,8 @@
         "name"        : "Spain",
         "forecast"    : "$20,000,000",
         "plan"        : "$10,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "interested in stock",
         "best-case"   : [ "$13,000,000","$14,500,000"],
         "commit"      : ["$2,050,050", "5,050,050"]
     },
@@ -57,8 +57,8 @@
         "name"        : "Germany",
         "forecast"    : "$200,000,000",
         "plan"        : "$100,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "preferred stock only",
         "best-case"   : [ "$6,006,000","$18,500,000"],
         "commit"      : ["$6,000,000", "10,000,000"]
     },
@@ -66,8 +66,8 @@
         "name"        : "England",
         "forecast"    : "$5,000,000",
         "plan"        : "$10,000,000",
-        "monthly-plan": "23,833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$23,833,333",
+        "comments"    : "Brexit",
         "best-case"   : [ "$4,500,000","$9,000,000"],
         "commit"      : ["$2,000,000", "3,000,000"]
     },
@@ -75,8 +75,8 @@
         "name"        : "Sweden",
         "forecast"    : "$20,000,000",
         "plan"        : "$10,000,000",
-        "monthly-plan": "833,333",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "monthly-plan": "$833,333",
+        "comments"    : "Ikea",
         "best-case"   : [ "$1,200,000","$1,300,000"],
         "commit"      : ["$100,000", "500,000"]
     },
@@ -85,7 +85,7 @@
         "forecast"    : "$13,000,000",
         "plan"        : "$14,000,000",
         "monthly-plan": "$5",
-        "comments"    : "If a company is to be liquidated, preferred stockholders have priority over common stockholders.",
+        "comments"    : "common stockholders",
         "best-case"   : [ "$12,000,000","$16,000,000"],
         "commit"      : ["$6,000,000", "8,000,000"]
     }
