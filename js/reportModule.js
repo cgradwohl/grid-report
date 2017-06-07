@@ -52,17 +52,19 @@ const events = {
 /***    @name GRID MODULE       ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
-    let map = ['','five', 'four', 'three', 'two', 'one'];
+    let map                  = ['','five', 'four', 'three', 'two', 'one'];
+    let header_template      = '<div class ="header col {{size}}"><strong>{{name}}</strong></div>';
+    let body_template        = '<div class ="body col {{col.size}}">{{col.value}}</div>';
+    let nested_body_template = '<div class ="body col {{col.size}}">{{#col.value}}<span class="hide">{{.}}</span>{{/col.value}}</div>';
 
     // cacheDOM
-    let $grid           = $('#grid-module');
-    let header_template = '<div class ="header col {{size}}"><strong>{{name}}</strong></div>';
-    let body_template   = '<div class ="body col {{col.size}}">{{col.value}}</div>';
+    let $grid = $('#grid-module');
 
     // bind events
     events.on('selectorChange', show);
     events.on('updateGrid', updateGrid);
 
+    // request data
     let gridData = new Promise( (resolve, reject) => {
         $.ajax({
             url     : 'data/data.json',
@@ -71,9 +73,9 @@ const events = {
             error   : err => reject(err)
         });
     });
-
     gridData.then(data => render(data));
 
+    // methods
     function render(data) {
 
         let headers        = Object.keys(data[0]);
@@ -103,7 +105,7 @@ const events = {
             for (let key in obj) {
                 if( names.includes(key) ) {
                     $grid.append(Mustache.render(body_template,
-                        {col:{value: obj[key],size: map[index]}}
+                        {col:{value: obj[key], size: map[index]}}
                     ));
                 }
             }
@@ -116,8 +118,8 @@ const events = {
         $grid.empty();
 
         gridData.then( data => {
-            let headers        = Object.keys(data[0]);
-            let names          = [];
+            let headers = Object.keys(data[0]);
+            let names   = [];
 
             indexArr.map(index => names.push(headers[index]) );
 
@@ -132,10 +134,20 @@ const events = {
             data.map(obj => {
                 for (let key in obj) {
                     if( names.includes(key) ){
-                        $grid.append(Mustache.render(body_template,
-                            {col:{value: obj[key],size: map[names.length]}}
-                        ));
+                        if( typeof(obj[key])==='object' ){
+                            console.log('key', key);
+                            console.log('obj[key]', obj[key]);
+                            // ADD LISTED TEMPLATE
+                            $grid.append(Mustache.render(nested_body_template,
+                                {col:{value: obj[key], size: map[names.length]}}
+                            ));
+                        }else {
+                            $grid.append(Mustache.render(body_template,
+                                {col:{value: obj[key], size: map[names.length]}}
+                            ));
+                        }
                     }
+
                 }
             });
         });
@@ -143,9 +155,7 @@ const events = {
     }
 
     function show(bool) {
-        if( bool ) // render more
-        else // render less
-        console.log(bool);
+
     }
 
 })();
