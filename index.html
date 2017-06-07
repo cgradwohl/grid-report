@@ -25,31 +25,21 @@
     </div>
 
 
+
     <!-- Dropdown Module -->
-    <div class="col one dropdown">
-        <button class="dropbtn">\/</button>
+    <div class="dropdown">
 
-        <div class="dropdown-content">
-            <form id="dropdown-module" class="dropdown-content" action="" method="get">
+        <div class="arrow-down"></div>
+        <form id="dropdown-module" class="dropdown-content">
+            <h3>Selected Fields</h3>
+            <button type="button"  name="button" onclick="events.emit('dropdownFormClick')">Apply</button>
+        </form>
 
-                <script id="dropdown_template" type="text/template">
-                    <input class="fields" type="checkbox" name="" value="{{value}}">{{name}}<br>
-                </script>
-
-                <button type="button" name="button" onclick="events.emit('dropdownFormClick')">Apply</button>
-            </form>
-        </div>
     </div>
-
 
     <!-- Grid Module -->
-    <div id="grid-module" class="row">
+    <div id="grid-module" class="row"></div>
 
-        <script id="grid-header" type="text/template"></script>
-
-        <script id="grid-body" type="text/template"></script>
-
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="js/mustache.min.js" charset="utf-8"></script>

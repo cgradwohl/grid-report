@@ -36,11 +36,13 @@ const events = {
 (function() {
     let map                  = ['','five', 'four', 'three', 'two', 'one'];
     let header_template      = '<div class ="header col {{size}}"><strong>{{name}}</strong></div>';
+    let last_header_template = '<div class ="header col {{size}}"><strong>{{name}}</strong><div class="dropdown" ><a class="dropbtn"><div class="arrow-down"></div></a><form id="dropdown-module" class="dropdown-content"><h3>Selected Fields</h3><button type="button" class="dropdown-btn" name="button" onclick="events.emit("dropdownFormClick")">Apply</button></form></div></div>';
     let body_template        = '<div class ="body col {{col.size}}">{{col.value}}<div class="hideMe"></div></div>';
     let nested_body_template = '<div class ="body col {{col.size}}"><div>{{col.value1}}</div><div class="hideMe">{{col.value2}}</div></div>';
 
     // cacheDOM
     let $grid = $('#grid-module');
+
 
     // bind events
     events.on('selectorChange', show);
@@ -57,7 +59,7 @@ const events = {
     });
     gridData.then(data => init(data));
 
-    // methods
+
     function init(data) {
 
         let headers        = Object.keys(data[0]);
@@ -96,6 +98,7 @@ const events = {
     }
 
     function updateGrid(indexArr) {
+
         // removes old templates
         $grid.empty();
 
@@ -127,15 +130,13 @@ const events = {
                             ));
                         }
                     }
-
                 }
             });
-
         });
-
     }
 
     function show(bool) {
+
         let $hiddenTags = $('.hideMe');
 
         if( bool ) $hiddenTags.show();
@@ -149,10 +150,10 @@ const events = {
 /***    @name DROPDOWN MODULE   ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
+
     // cacheDOM
     let $dropdown = $('#dropdown-module');
-    let dropdown_template = $('#dropdown_template').html();
-
+    let checkbox_template = '<input class="fields" type="checkbox" name="" value="{{value}}">{{name}}<br>';
 
     // bind events
     events.on('renderDropdown', render);
@@ -161,6 +162,7 @@ const events = {
     // gets the index of the selected fields
     // makes an extra DOM query :(
     function getSelected(){
+
         let numbers = [];
         let $fields = $('.fields').toArray().map(field => {
             if(field['checked']) numbers.push(field['value']);
@@ -171,17 +173,14 @@ const events = {
     }
 
     function render(data) {
+
         let i = 0;
         data.map(name => {
-            $dropdown.append(Mustache.render(dropdown_template,
+            $dropdown.append(Mustache.render(checkbox_template,
                 {name: name.toUpperCase(), value: i}
             ));
             i ++;
         });
-    }
-
-    function updateGrid() {
-        console.log('hello');
     }
 
 })();
