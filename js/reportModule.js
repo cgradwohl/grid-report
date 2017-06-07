@@ -52,15 +52,15 @@ const events = {
 /***    @name GRID MODULE       ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
-    let map      = ['','five', 'four', 'three', 'two', 'one'];
+    let map = ['','five', 'four', 'three', 'two', 'one'];
 
     // cacheDOM
-    let $grid = $('#grid-module');
-    let header_template = '<div class="header col {{size}}"><strong>{{name}}</strong></div>';
-    let body_template = '<div class="body col {{col.size}}">{{col.value}}</div>';
+    let $grid           = $('#grid-module');
+    let header_template = '<div class ="header col {{size}}"><strong>{{name}}</strong></div>';
+    let body_template   = '<div class ="body col {{col.size}}">{{col.value}}</div>';
 
     // bind events
-    // events.on('selectorChange', show);
+    events.on('selectorChange', show);
     events.on('updateGrid', updateGrid);
 
     let gridData = new Promise( (resolve, reject) => {
@@ -92,16 +92,16 @@ const events = {
         }
 
         // renders Grid Header
-        names.forEach(name => {
+        names.map(name => {
             $grid.append(Mustache.render(header_template,
                 {name: name.toUpperCase(), size: map[index]}
             ));
         });
 
         // renders Grid Body
-        data.forEach(obj => {
+        data.map(obj => {
             for (let key in obj) {
-                if( names.includes(key) ){
+                if( names.includes(key) ) {
                     $grid.append(Mustache.render(body_template,
                         {col:{value: obj[key],size: map[index]}}
                     ));
@@ -112,7 +112,6 @@ const events = {
     }
 
     function updateGrid(indexArr) {
-
         // removes old templates
         $grid.empty();
 
@@ -120,19 +119,17 @@ const events = {
             let headers        = Object.keys(data[0]);
             let names          = [];
 
-            indexArr.forEach(index => {
-                names.push(headers[index]);
-            });
+            indexArr.map(index => names.push(headers[index]) );
 
             // renders Grid Header
-            names.forEach(name => {
+            names.map(name => {
                 $grid.append(Mustache.render(header_template,
                     {name: name.toUpperCase(), size: map[names.length]}
                 ));
             });
 
             // renders Grid Body
-            data.forEach(obj => {
+            data.map(obj => {
                 for (let key in obj) {
                     if( names.includes(key) ){
                         $grid.append(Mustache.render(body_template,
@@ -145,24 +142,12 @@ const events = {
 
     }
 
-    // @TODO: show(bool) - if(bool) render more else render less,
-
-    // @TODO
-    // takes as input an array of names
-    /*function renderHeader(data) {
-
+    function show(bool) {
+        if( bool ) // render more
+        else // render less
+        console.log(bool);
     }
-    */
 
-
-
-    // @TODO
-    // events.on('promisetest', updateBody); <- use this bind the DROPDOWN update
-    // we want this to take the full object array as input
-    /*function renderBody(data) {
-        console.log(data);
-        // RENDER NEW GRID BODY
-    }*/
 })();
 
 
@@ -170,63 +155,34 @@ const events = {
 /***    @name DROPDOWN MODULE   ***/
 /***    *   *   *   *   *   *   ***/
 (function() {
-
-
     // cacheDOM
     let $dropdown = $('#dropdown-module');
     let dropdown_template = $('#dropdown_template').html();
 
 
-
     // bind events
-    // events.on('columnNames', render);
-    // OR
-    // events.on('columnNames', setDropdown);
     events.on('renderDropdown', render);
     events.on('dropdownFormClick', getSelected);
-
 
     // gets the index of the selected fields
     // makes an extra DOM query :(
     function getSelected(){
         let numbers = [];
-        let $fields = $('.fields').toArray();
-
-        $fields.forEach(field => {
-            if(field['checked']){
-                numbers.push(field['value']);
-            }
+        let $fields = $('.fields').toArray().map(field => {
+            if(field['checked']) numbers.push(field['value']);
         });
 
         if( numbers.length>5 ) alert("PLEASE SELECT ONLY FIVE FIELDS!")
         else events.emit('updateGrid', numbers);
     }
 
-
-    function setDropdown(columnNames) {
-        // use columnNames to render the dropdown-content
-        // console.log(columnNames);
-
-        // @TODO
-        // USE THE PROMISE TO EMIT EVENT FROM DROPDOWN :)
-        // USE THIS IN DROPDOWN
-        /*gridData.then( data => {
-            events.emit('promisetest', data);
-        });*/
-    }
-
-
     function render(data) {
-
         let i = 0;
-        data.forEach(name => {
+        data.map(name => {
             $dropdown.append(Mustache.render(dropdown_template,
-                {
-                    name: name.toUpperCase(),
-                    value: i
-                }
+                {name: name.toUpperCase(), value: i}
             ));
-            i += 1;
+            i ++;
         });
     }
 
@@ -234,5 +190,4 @@ const events = {
         console.log('hello');
     }
 
-    // @TODO: applyColumnChange() - events.emit('columnChange', newColumnNames)
 })();

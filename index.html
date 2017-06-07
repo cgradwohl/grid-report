@@ -16,11 +16,11 @@
     <!-- Selector Module -->
     <div id="selector-module" class="col one selector">
         <label>Less
-        <input type="radio" name="selector" value="less" checked>
+        <input type="radio" onclick="events.emit('selectorChange', false)" name="selector" value="less" checked>
         </label>
 
         <label>More
-        <input type="radio" name="selector" value="more">
+        <input type="radio" onclick="events.emit('selectorChange', true)" name="selector" value="more">
         </label>
     </div>
 
