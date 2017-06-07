@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="css/selector.css">
   <link rel="stylesheet" href="css/dropdown.css">
+  <link href="https://fonts.googleapis.com/css?family=Yantramanav:300" rel="stylesheet">
   <title>Grid Report</title>
 </head>
 <body>
@@ -32,10 +33,10 @@
             <form id="dropdown-module" class="dropdown-content" action="" method="get">
 
                 <script id="dropdown_template" type="text/template">
-                    <input type="checkbox" name="vehicle" value="{{name}}">{{name}}<br>
+                    <input class="fields" type="checkbox" name="" value="{{value}}">{{name}}<br>
                 </script>
 
-                <input type="submit" value="Apply">
+                <button type="button" name="button" onclick="events.emit('dropdownFormClick')">Apply</button>
             </form>
         </div>
     </div>
@@ -45,15 +46,12 @@
     <div id="grid-module" class="row">
 
         <script id="grid-header" type="text/template">
-            <div class="col {{size}}">{{name}}</div>
+            <div class="header col {{size}}"><strong>{{name}}</strong></div>
         </script>
 
         <script id="grid-body" type="text/template">
-            <div class="col {{col.size}}">{{col.value}}</div>
+            <div class="body col {{col.size}}">{{col.value}}</div>
         </script>
-
-
-        <!-- <div class="col one">11</div> -->
 
     </div>
 

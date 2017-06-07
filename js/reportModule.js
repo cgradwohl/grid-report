@@ -56,14 +56,12 @@ const events = {
 
     // cacheDOM
     let $grid = $('#grid-module');
-    let header_template = $('#grid-header').html();
-    let body_template = $('#grid-body').html();
+    let header_template = '<div class="header col {{size}}"><strong>{{name}}</strong></div>';
+    let body_template = '<div class="body col {{col.size}}">{{col.value}}</div>';
 
     // bind events
-    /*events.on('selectorChange', show);
-    events.on('columnChange', updateGrid);
-    events.on('gridHeader', renderHeader);
-    events.on('gridBody', renderBody);*/
+    // events.on('selectorChange', show);
+    events.on('updateGrid', updateGrid);
 
     let gridData = new Promise( (resolve, reject) => {
         $.ajax({
@@ -113,6 +111,40 @@ const events = {
 
     }
 
+    function updateGrid(indexArr) {
+
+        // removes old templates
+        $grid.empty();
+
+        gridData.then( data => {
+            let headers        = Object.keys(data[0]);
+            let names          = [];
+
+            indexArr.forEach(index => {
+                names.push(headers[index]);
+            });
+
+            // renders Grid Header
+            names.forEach(name => {
+                $grid.append(Mustache.render(header_template,
+                    {name: name.toUpperCase(), size: map[names.length]}
+                ));
+            });
+
+            // renders Grid Body
+            data.forEach(obj => {
+                for (let key in obj) {
+                    if( names.includes(key) ){
+                        $grid.append(Mustache.render(body_template,
+                            {col:{value: obj[key],size: map[names.length]}}
+                        ));
+                    }
+                }
+            });
+        });
+
+    }
+
     // @TODO: show(bool) - if(bool) render more else render less,
 
     // @TODO
@@ -145,12 +177,30 @@ const events = {
     let dropdown_template = $('#dropdown_template').html();
 
 
+
     // bind events
     // events.on('columnNames', render);
     // OR
     // events.on('columnNames', setDropdown);
-
     events.on('renderDropdown', render);
+    events.on('dropdownFormClick', getSelected);
+
+
+    // gets the index of the selected fields
+    // makes an extra DOM query :(
+    function getSelected(){
+        let numbers = [];
+        let $fields = $('.fields').toArray();
+
+        $fields.forEach(field => {
+            if(field['checked']){
+                numbers.push(field['value']);
+            }
+        });
+
+        if( numbers.length>5 ) alert("PLEASE SELECT ONLY FIVE FIELDS!")
+        else events.emit('updateGrid', numbers);
+    }
 
 
     function setDropdown(columnNames) {
@@ -167,11 +217,21 @@ const events = {
 
 
     function render(data) {
+
+        let i = 0;
         data.forEach(name => {
             $dropdown.append(Mustache.render(dropdown_template,
-                {name: name}
+                {
+                    name: name.toUpperCase(),
+                    value: i
+                }
             ));
+            i += 1;
         });
+    }
+
+    function updateGrid() {
+        console.log('hello');
     }
 
     // @TODO: applyColumnChange() - events.emit('columnChange', newColumnNames)

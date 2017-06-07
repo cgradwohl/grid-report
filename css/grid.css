@@ -1,5 +1,9 @@
 /* FIVE COLUMN LAYOUT  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -*/
-*{box-sizing: border-box;}
+*{
+    box-sizing: border-box;
+    font-family: 'Yantramanav', sans-serif;
+}
+
 
 body {
   width: 100%;
