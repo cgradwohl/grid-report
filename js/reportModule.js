@@ -50,21 +50,22 @@ const events = {
     // subscribe to events
     events.on('selectorChange', show);
     events.on('columnChange', updateGrid);
-    events.on('columnSort', sort);
 
-    function sort(id) {
+    // events.on('columnSort', sort);
 
-        let bool = true;
+    /*function sort(id) {
 
         let col = [...document.getElementsByClassName(id)];
         col.shift();
 
+        // sorts the innerText of the selected column
         let names = col.map(item => item.innerText).sort();
 
+        // appends a buffer div to keep grid pretty
         col.forEach(item => {
             $(item).html(names.pop() + '<div class=' + 'hideMe' + ' style=' + '&quot;&quot;' + '></div>');
         });
-    }
+    }*/
 
     // saves ajax success response as a resolved promise
     let gridData = new Promise( (resolve, reject) => {
