@@ -53,17 +53,17 @@ const events = {
     events.on('columnSort', sort);
 
     function sort(id) {
+
+        let bool = true;
+
         let col = [...document.getElementsByClassName(id)];
         col.shift();
-        console.log(col);
+
+        let names = col.map(item => item.innerText).sort();
+
         col.forEach(item => {
-            $(item).html('dude' + '<div class=' + 'hideMe' + ' style=' + '&quot;&quot;' + '></div>');
-        })
-
-        console.log(col);
-
-        // $("#regTitle").html("Hello World");
-
+            $(item).html(names.pop() + '<div class=' + 'hideMe' + ' style=' + '&quot;&quot;' + '></div>');
+        });
     }
 
     // saves ajax success response as a resolved promise
