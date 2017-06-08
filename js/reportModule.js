@@ -164,10 +164,22 @@ const events = {
     let checkbox_template = '<input class="fields" type="checkbox" name="" value="{{value}}">{{name}}<br>';
 
     // subscribe to events
-    events.on('renderDropdown', render);
+    events.on('renderDropdown', init);
     events.on('dropdownFormClick', getSelected);
 
-    // gets the index of the selected fields
+    /** @param {Array<String>} - initializes the dropdown with json key names */
+    function init(data) {
+
+        let i = 0;
+        data.map(name => {
+            $dropdown.append(Mustache.render(checkbox_template,
+                {name: name.toUpperCase(), value: i}
+            ));
+            i ++;
+        });
+    }
+
+    /** @param {None} - gets the index of the selected fields and sends to Grid Module */
     function getSelected() {
 
         let numbers = [];
@@ -177,19 +189,7 @@ const events = {
 
         if( numbers.length>5 ) alert("PLEASE SELECT ONLY FIVE FIELDS!")
 
-        // sends index of selected fields to Grid Module
         else events.emit('columnChange', numbers);
-    }
-
-    function render(data) {
-
-        let i = 0;
-        data.map(name => {
-            $dropdown.append(Mustache.render(checkbox_template,
-                {name: name.toUpperCase(), value: i}
-            ));
-            i ++;
-        });
     }
 
 })();

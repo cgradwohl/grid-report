@@ -23,9 +23,14 @@ To learn more about about these patterns see:
 
 
 #### GRID MODULE
-The Grid Module is styled by a custom five column DIV layout, which is populated by JSON data and rendered via mustache templates. JSON is requested via an AJAX request, which I wrapped in a promise, so the module only makes one ajax request.
+The Grid Module is styled by a custom five column DIV layout, which is populated by JSON data and rendered via mustache templates. JSON is requested via an AJAX request, which I wrapped in a promise, so the module only makes one AJAX request.
 
-The Grid Module has three main operations: init(), updateGrid(), show() and transfers its state via the Event Mediator.
+The Grid Module has three main operations: init(), updateGrid(), show() and transfers its state to Dropdown module via the Event Mediator.
 
 
 #### DROPDOWN MODULE
+I designed the Dropdown module to be responsible for a lot of state transfer in the application and this made it difficult to render and position with Mustache templates.
+
+On the form click event, the module grabs the value of the selected checkboxes, and sends that value to the Grid module to be mapped to a field in the JSON array.
+
+The Dropdown Module has two main operations: init(), getSelected() and transfers its state to Grid module via the Event Mediator.

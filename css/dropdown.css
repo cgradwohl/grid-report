@@ -4,7 +4,7 @@
     border: 1px solid;
     float: right;
     height: 68px;
-    width: 200px;
+    width: 241px;
 }
 
 /* show the dropdown menu on hover */
@@ -46,15 +46,21 @@
 
 /* custom triangle */
 .arrow-down {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid grey;
-  margin-top: 15%;
-  margin-left: 15%;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid grey;
+    margin-top: 12%;
+    margin-left: 12%;
 }
 
 .dropdown:hover .arrow-down {
-     border-top: 10px solid red;
+    border-top: 10px solid red;
+}
+
+.opt {
+    padding-left: 55px;
+    position: relative;
+    bottom: 12px;
 }
