@@ -51,7 +51,7 @@ const events = {
     events.on('selectorChange', show);
     events.on('columnChange', updateGrid);
 
-    // saves ajax request as a promise
+    // saves ajax success response as a resolved promise
     let gridData = new Promise( (resolve, reject) => {
         $.ajax({
             url     : 'data/data.json',
