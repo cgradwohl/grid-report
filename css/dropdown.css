@@ -3,8 +3,6 @@
     margin-top: 2%;
     border: 1px solid;
     float: right;
-    height: 68px;
-    width: 241px;
 }
 
 /* show the dropdown menu on hover */
@@ -20,6 +18,7 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    text-align: left;
 }
 
 .dropdown-content h3 {
@@ -32,11 +31,15 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    background-color: #e7e7e7;
+    background-color: lightgrey;
     color: black;
     border-radius: 4px;
     border: none;
     text-decoration: none;
+}
+
+.dropdown-content button:hover {
+    background:  #007eff;
 }
 
 /* rendered in text box template*/
@@ -51,16 +54,16 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid grey;
-    margin-top: 12%;
+    margin-top: 3%;
     margin-left: 12%;
 }
 
 .dropdown:hover .arrow-down {
-    border-top: 10px solid red;
+    border-top: 10px solid  #007eff;
 }
 
 .opt {
-    padding-left: 55px;
+    padding-left: 40px;
     position: relative;
-    bottom: 12px;
+    bottom: 7px;
 }
